@@ -1,0 +1,56 @@
+# docker-compose.yml
+version: '3.8' # Docker Compose 파일 형식 버전
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: postgres_db
+    environment:
+      POSTGRES_DB: atom
+      POSTGRES_USER: bts
+      POSTGRES_PASSWORD: 1234
+    ports:
+      - "5433:5432" 
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: unless-stopped
+  backend:
+    build:
+      context: ./backend # backend 폴더에서 Dockerfile 찾음
+      dockerfile: Dockerfile
+    container_name: spring_boot_backend # 컨테이너 이름 (선택 사항)
+    ports:
+      - "8485:8485" # 호스트:컨테이너 포트 매핑 (외부에서 백엔드 접근 시)
+    environment:
+      # application.properties에서 사용한 환경 변수를 Docker Compose에서도 설정
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/atom
+      SPRING_DATASOURCE_USERNAME: bts
+      SPRING_DATASOURCE_PASSWORD: 1234
+    depends_on: # db 서비스가 먼저 시작되도록 의존성 설정
+      - db
+    restart: unless-stopped
+
+  # 3. React 프론트엔드 서비스
+  frontend:
+    build:
+      context: ./frontend # frontend 폴더에서 Dockerfile 찾음
+      dockerfile: Dockerfile
+    container_name: react_frontend # 컨테이너 이름 (선택 사항)
+    ports:
+      - "3000:3000" #원래 3000:80 이었음 
+    volumes:
+      - ./frontend:/app # 호스트의 ./frontend 폴더를 컨테이너의 /app 폴더에 마운트
+      - /app/node_modules # 컨테이너 내부의 node_modules는 마운트하지 않도록 예외 처리
+    environment:
+      # React 앱에서 백엔드 API를 호출할 때 사용할 환경 변수 설정
+      # Docker 컨테이너 내부에서는 'backend' 서비스 이름으로 백엔드에 접근합니다.
+      # 이 URL은 React 앱 코드 내에서 process.env.REACT_APP_API_URL 등으로 사용됩니다.
+      REACT_APP_API_URL: http://backend:8485 # 백엔드 서비스명과 포트
+
+    depends_on: # 백엔드가 먼저 시작되도록 의존성 설정 
+      - backend
+    restart: unless-stopped
+    command: npm start # React 개발 서버 실행 명령 (Dockerfile CMD를 덮어씀)
+
+volumes:
+  pgdata: # PostgreSQL 데이터 저장을 위한 이름 있는 볼륨
