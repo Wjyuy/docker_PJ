@@ -11,6 +11,6 @@ public class MainController {
     @RequestMapping("/list") // 또는 @GetMapping("/list")
     public String list() { // Model 매개변수는 더 이상 필요 없음
         log.info("@# list32()");
-        return "lis23t"; // "list"라는 문자열이 직접 응답으로 전송됨
+        return "lis23t333"; // "list"라는 문자열이 직접 응답으로 전송됨
     }
 }

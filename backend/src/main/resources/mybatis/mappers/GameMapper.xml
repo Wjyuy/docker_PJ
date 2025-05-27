@@ -1,0 +1,89 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.boot.dao.GameDAO">
+    <resultMap id="GameResultMap" type="com.boot.dto.GameDTO">
+        <id property="id" column="id" />
+        <result property="name" column="name" />
+        <result property="genre" column="genre" />
+        <result property="platform" column="platform" />
+        <result property="releaseDate" column="release_date" />
+        <result property="description" column="description" />
+        <result property="imageUrl" column="image_url" />
+        <result property="rating" column="rating" />
+    </resultMap>
+
+    <select id="findAll" resultType="com.boot.dto.GameDTO">
+        SELECT
+            id,
+            name,
+            genre,
+            platform,
+            release_date AS releaseDate, -- snake_case를 camelCase로 매핑
+            description,
+            image_url AS imageUrl,       -- snake_case를 camelCase로 매핑
+            rating,
+            igdb_id                      -- igdb_id 컬럼 추가
+        FROM game
+    </select>
+
+    <select id="findById" resultType="com.boot.dto.GameDTO">
+        SELECT
+            id,
+            name,
+            genre,
+            platform,
+            release_date AS releaseDate,
+            description,
+            image_url AS imageUrl,
+            rating,
+            igdb_id
+        FROM game
+        WHERE id = #{id}
+    </select>
+
+
+    <select id="findByIgdbId" resultType="com.boot.dto.GameDTO">
+        SELECT
+            id,
+            name,
+            genre,
+            platform,
+            release_date AS releaseDate,
+            description,
+            image_url AS imageUrl,
+            rating,
+            igdb_id
+        FROM game
+        WHERE igdb_id = #{igdbId} </select>
+        
+    <insert id="insert" parameterType="com.boot.dto.GameDTO">
+        INSERT INTO game (name, genre, platform, release_date, description, image_url, rating, igdb_id)
+        VALUES (
+            #{name},
+            #{genre},
+            #{platform},
+            #{releaseDate},
+            #{description},
+            #{imageUrl},
+            #{rating},
+            #{igdb_id} )
+    </insert>
+
+    <update id="update" parameterType="com.boot.dto.GameDTO">
+        UPDATE game SET
+            name = #{name},
+            genre = #{genre},
+            platform = #{platform},
+            release_date = #{releaseDate},
+            description = #{description},
+            image_url = #{imageUrl},
+            rating = #{rating}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="long">
+        DELETE FROM game WHERE id = #{id}
+    </delete>
+</mapper>

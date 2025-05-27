@@ -35,3 +35,7 @@ out/
 
 ### VS Code ###
 .vscode/
+
+# Spring Boot 환경설정(민감정보)
+src/main/resources/application.properties
+src/main/resources/application-docker.properties

@@ -26,6 +26,7 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/atom
       SPRING_DATASOURCE_USERNAME: bts
       SPRING_DATASOURCE_PASSWORD: 1234
+      SPRING_PROFILES_ACTIVE: docker  # 도커 전용 프로파일 활성화
     depends_on: # db 서비스가 먼저 시작되도록 의존성 설정
       - db
     restart: unless-stopped
@@ -35,7 +36,7 @@ services:
     build:
       context: ./frontend # frontend 폴더에서 Dockerfile 찾음
       dockerfile: Dockerfile
-    container_name: react_frontend # 컨테이너 이름 (선택 사항)
+    container_name: react_frontend 
     ports:
       - "3000:3000" #원래 3000:80 이었음 
     volumes:
@@ -45,8 +46,8 @@ services:
       # React 앱에서 백엔드 API를 호출할 때 사용할 환경 변수 설정
       # Docker 컨테이너 내부에서는 'backend' 서비스 이름으로 백엔드에 접근합니다.
       # 이 URL은 React 앱 코드 내에서 process.env.REACT_APP_API_URL 등으로 사용됩니다.
-      REACT_APP_API_URL: http://backend:8485 # 백엔드 서비스명과 포트
-
+      REACT_APP_API_PROXY_TARGET: http://backend:8485 # 백엔드 서비스명과 포트
+      REACT_APP_API_URL: http://localhost:8485
     depends_on: # 백엔드가 먼저 시작되도록 의존성 설정 
       - backend
     restart: unless-stopped

@@ -1,4 +1,4 @@
-# OpenJDK 17을 기반으로 하는 경량화 스프링 부트 이미지
+# OpenJDK 11을 기반으로 하는 경량화 스프링 부트 이미지
 FROM openjdk:11-jdk-slim
 
 # 작업 디렉토리 설정
@@ -8,7 +8,7 @@ WORKDIR /app
 COPY build/libs/*.jar app.jar
 
 # 포트 설정
-EXPOSE 8080
+EXPOSE 8485
 
 # 실행 명령어
 ENTRYPOINT ["java", "-jar", "app.jar"]
