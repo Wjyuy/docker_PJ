@@ -248,4 +248,33 @@ public class IGDBServiceImpl implements IGDBService {
         System.out.println("총 저장/업데이트된 게임 수: " + totalSaved);
         return totalSaved;
     }
+    @Override 
+    public int fetchAndSaveGamesPaged(String baseQuery, int limit, int maxCount, int startOffset) {
+        int totalSaved = 0;
+        int currentOffset = startOffset;
+        while (totalSaved < maxCount) {
+            String pagedQuery = baseQuery + "; limit " + limit + "; offset " + currentOffset + ";";
+            System.out.println("IGDB fetchAndSaveGamesPaged: fetching " + limit + " games from offset " + currentOffset);
+            int saved = fetchAndSaveGames(pagedQuery);
+            if (saved == 0) {
+                System.out.println("fetchAndSaveGamesPaged: No new games saved in this batch, or end of data.");
+                break;
+            }
+            totalSaved += saved;
+            currentOffset += limit; // <-- 다음 호출을 위해 offset 증가
+            try {
+                Thread.sleep(1200);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                System.err.println("스레드 인터럽트 발생: " + e.getMessage());
+                break;
+            }
+            if (currentOffset >= maxCount + startOffset) { // maxCount와 startOffset 고려하여 종료 조건 수정
+                 System.out.println("Reached maxCount limit for synchronization.");
+                 break;
+            }
+        }
+        System.out.println("총 저장/업데이트된 게임 수: " + totalSaved);
+        return totalSaved;
+    }
 }

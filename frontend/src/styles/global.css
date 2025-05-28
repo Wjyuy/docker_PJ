@@ -1,0 +1,128 @@
+/* src/index.css (또는 src/global.css) */
+
+/* 기본 설정: 모든 브라우저의 기본 여백/패딩 제거 및 박스 모델 설정 */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ----------------------------------------------------- */
+/* 1. Rem 단위 기준 설정 (매우 중요!) */
+/* ----------------------------------------------------- */
+/* 기본 폰트 크기를 16px로 설정 (보통 브라우저 기본값) */
+html {
+  font-size: 16px; /* 1rem = 16px */
+}
+
+/* ----------------------------------------------------- */
+/* 2. 다크모드 / 화이트모드 CSS 변수 정의 */
+/* ----------------------------------------------------- */
+
+/* Light 모드 기본 변수 */
+body.light {
+  /* 배경색 */
+  --bg-color-primary: #f0f2f5; /* 기본 배경 */
+  --bg-color-secondary: #ffffff; /* 카드, 모달 등 내부 요소 배경 */
+  --bg-color-header: #ffffff; /* 헤더 배경 */
+
+  /* 텍스트 색상 */
+  --text-color-primary: #333333; /* 기본 텍스트 */
+  --text-color-secondary: #555555; /* 보조 텍스트 */
+  --text-color-header: #333333; /* 헤더 텍스트 */
+  --text-color-nav-link: #555; /* 내비 링크 텍스트 */
+
+  /* 그림자 */
+  --box-shadow-light: 0 2px 8px rgba(0,0,0,0.1);
+  --box-shadow-medium: 0 4px 8px rgba(0,0,0,0.1);
+
+  /* 강조 색상 (테마와 무관하게 유지될 수 있음) */
+  --accent-color: gold; 
+  --accent-color-hover: gold; 
+
+  /* 오버레이 배경색 (투명도 있는 흰색) */
+  --overlay-bg-color: rgba(255, 255, 255, 0.9); 
+
+  /* 화이트일때 태양 아이콘 기존 검정  */
+  --theme-toggle-icon-color: #17171C;
+  --theme-toggle-bg:#FFFFFF;
+}
+
+/* Dark 모드 변수 */
+body.dark {
+  /* 배경색 */
+  --bg-color-primary: #1a1a1a; /* 기본 배경 */
+  --bg-color-secondary: #2c2c2c; /* 카드, 모달 등 내부 요소 배경 */
+  --bg-color-header: #111111; /* 헤더 배경 */
+
+  /* 텍스트 색상 */
+  --text-color-primary: #f0f0f0; /* 기본 텍스트 */
+  --text-color-secondary: #cccccc; /* 보조 텍스트 */
+  --text-color-header: #f0f0f0; /* 헤더 텍스트 */
+  --text-color-nav-link: #ccc; /* 내비 링크 텍스트 */
+
+  /* 그림자 */
+  --box-shadow-light: 0 2px 8px rgba(0,0,0,0.4);
+  --box-shadow-medium: 0 4px 8px rgba(0,0,0,0.3);
+
+  /* 강조 색상 (테마와 무관하게 유지될 수 있음) */
+  --accent-color: #e50914; /* 다크모드에 어울리는 강조색 */
+  --accent-color-hover: #4e721f; /* nav-link hover 색상 조정 */
+
+  /* 오버레이 배경색 (어두운 반투명 검은색) */
+  --overlay-bg-color: rgba(0, 0, 0, 0.9);
+
+  /* 다크일때 태양 아이콘 기존 하양  */
+  --theme-toggle-icon-color: #F2F0EE;
+}
+
+/* 트랜지션 (부드러운 테마 전환) */
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ----------------------------------------------------- */
+/* 3. 미디어 쿼리 (폰트 스케일 조절) */
+/* ----------------------------------------------------- */
+
+@media (max-width: 768px) { /* 태블릿/모바일 기준 */
+  html {
+    font-size: 15px; /* 1rem = 15px */
+  }
+}
+
+@media (max-width: 480px) { /* 모바일 기준 */
+  html {
+    font-size: 14px; /* 1rem = 14px */
+  }
+}
+
+/* ----------------------------------------------------- */
+/* 4. 전역적으로 사용될 수 있는 기본 스타일 (선택 사항) */
+/* ----------------------------------------------------- */
+body {
+  background-color: var(--bg-color-primary);
+  color: var(--text-color-primary);
+}
+
+/* 메인 콘텐츠 영역 (예시) */
+main {
+  background-color: var(--bg-color-primary);
+  color: var(--text-color-primary);
+  padding: 2rem; /* App.tsx의 인라인 스타일 대신 여기에 정의 */
+}
+
+/* 카드 컴포넌트 예시 */
+.card {
+  background-color: var(--bg-color-secondary);
+  box-shadow: var(--box-shadow-medium);
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1.5rem;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* 기타 유틸리티 클래스 */
+.text-accent {
+  color: var(--accent-color);
+}

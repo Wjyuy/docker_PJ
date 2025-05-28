@@ -1,0 +1,25 @@
+.game-list-page {
+  width: 100%;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.page-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 32px;
+  color: #fff;
+  letter-spacing: -1px;
+}
+.game-list-placeholder {
+  width: 100%;
+  min-height: 300px;
+  background: rgba(30,30,30,0.7);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #bbb;
+  font-size: 1.2rem;
+}

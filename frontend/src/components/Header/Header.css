@@ -1,0 +1,158 @@
+/* src/components/Header/Header.css */
+
+/* ----------------------------------------------------- */
+/* 1. Header 공통 스타일 */
+/* ----------------------------------------------------- */
+.header {
+  width: 100%;
+  background: var(--bg-color-primary); /* CSS 변수 사용 */
+  color: var(--text-color-header); /* CSS 변수 사용 */
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--box-shadow-light); /* CSS 변수 사용 */
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease; /* 트랜지션 추가 */
+}
+
+.header-content {
+  max-width: 87.5rem;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 4rem;
+  padding: 0 2rem;
+}
+
+.header-logo {
+  height: 3rem;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+/* --- 2. 데스크톱 내비게이션 스타일 --- */
+.nav {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-link {
+  color: var(--text-color-nav-link); /* CSS 변수 사용 */
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: color 0.2s;
+  white-space: nowrap;
+}
+
+.nav-link:hover {
+  color: var(--accent-color-hover); /* CSS 변수 사용 */
+}
+
+/* --- 3. 모바일 메뉴 버튼 --- */
+.mobile-menu-button {
+  display: none; /* 데스크톱에서는 숨김 */
+  background: none;
+  border: none;
+  color: var(--text-color-header); /* CSS 변수 사용 */
+  font-size: 1.8rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  z-index: 101;
+  position: relative;
+}
+
+/* --- 5. 미디어 쿼리 (반응형 조절) --- */
+
+/* 태블릿 및 작은 데스크톱 (최대 1024px) */
+@media (max-width: 1024px) {
+  .header-content {
+    padding: 0 1.5rem;
+    height: 3.8rem;
+  }
+
+  .header-logo {
+    height: 2.8rem;
+  }
+
+  .nav {
+    gap: 1rem;
+  }
+
+  .nav-link {
+    font-size: 1rem;
+  }
+}
+
+/* 모바일 (최대 768px) */
+@media (max-width: 768px) {
+  html {
+    font-size: 15px;
+  }
+
+  .header-content {
+    justify-content: space-between;
+    height: 3.5rem;
+    padding: 0 1.2rem;
+  }
+
+  .header-logo {
+    height: 2.5rem;
+  }
+
+  .desktop-nav {
+    display: none; /* 데스크톱 내비게이션 숨김 */
+  }
+
+  .mobile-menu-button {
+    display: block; /* 모바일에서 햄버거 버튼 표시 */
+  }
+
+  .mobile-nav-overlay {
+    display: flex;
+  }
+}
+
+/* 아주 작은 모바일 기기 (최대 480px) */
+@media (max-width: 480px) {
+  html {
+    font-size: 14px;
+  }
+
+  .header-content {
+    height: 3rem;
+    padding: 0 1rem;
+  }
+
+  .header-logo {
+    height: 2rem;
+  }
+
+  .mobile-menu-button {
+    font-size: 1.5rem;
+  }
+
+  .mobile-nav .nav-link {
+    font-size: 1.6rem;
+  }
+}
+
+/* ----------------------------------------------------- */
+/* 6. 테마 토글 버튼 스타일 */
+/* ----------------------------------------------------- */
+.theme-toggle-button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  margin-left: 1.5rem;
+  color: var(--text-color-header); /* 헤더 텍스트 색상을 따름 */
+  transition: color 0.3s ease;
+}
+
+/* 모바일 뷰에서 테마 토글 버튼 숨기기 (선택 사항, 필요시 주석 해제) */
+@media (max-width: 768px) {
+  /* .theme-toggle-button {
+    display: none;
+  } */
+}

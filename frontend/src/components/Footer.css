@@ -1,0 +1,49 @@
+/* src/components/Footer/Footer.css */
+.footer {
+  background-color: var(--bg-color-primary); /* 테마 배경색 사용 */
+  color: var(--text-color-secondary); /* 테마 텍스트색 사용 */
+  padding: 2rem;
+  text-align: center;
+  box-shadow: var(--box-shadow-light); /* 테마 그림자 사용 */
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  margin-top: auto; /* 푸터를 하단에 고정하고 싶을 때 (App.tsx의 Flexbox와 함께) */
+}
+
+.footer-content {
+  max-width: 87.5rem; /* 헤더와 동일하게 최대 너비 설정 */
+  margin: 0 auto; /* 중앙 정렬 */
+  display: flex;
+  flex-direction: column; /* 콘텐츠를 세로로 정렬 */
+  align-items: center;
+  gap: 0.5rem; /* 링크와 텍스트 간 간격 */
+}
+
+.footer-links {
+  display: flex;
+  gap: 0.5rem; /* 링크 간 간격 */
+  flex-wrap: wrap; /* 작은 화면에서 링크가 줄바꿈되도록 */
+  justify-content: center;
+}
+
+.footer a {
+  color: var(--text-color-secondary); 
+  text-decoration: none;
+  font-size: 0.9rem; /* 텍스트 크기 조정 */
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+/* 모바일 미디어 쿼리 (필요시) */
+@media (max-width: 768px) {
+  .footer {
+    padding: 1.5rem;
+  }
+  .footer-content {
+    gap: 0.3rem;
+  }
+  .footer-links {
+    font-size: 0.8rem;
+  }
+}

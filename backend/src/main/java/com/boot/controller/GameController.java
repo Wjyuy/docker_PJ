@@ -59,4 +59,14 @@ public class GameController {
                              @RequestParam(defaultValue = "2000") int maxCount) {
         return igdbService.fetchAndSaveGamesPaged(baseQuery, limit, maxCount);
     }
+    
+    @PostMapping("/sync/bulk-from")
+    public int syncGamesBulkFromOffset(
+                             @RequestParam(defaultValue = "fields id, name, genres, platforms, first_release_date, summary, cover.url, rating; sort popularity desc") String baseQuery,
+                             @RequestParam(defaultValue = "500") int limit,
+                             @RequestParam(defaultValue = "2000") int maxCount,
+                             @RequestParam(defaultValue = "2983") int startOffset) { 
+        return igdbService.fetchAndSaveGamesPaged(baseQuery, limit, maxCount, startOffset);
+    }
 }
+
