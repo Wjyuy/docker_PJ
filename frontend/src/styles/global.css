@@ -22,7 +22,7 @@ html {
 /* Light 모드 기본 변수 */
 body.light {
   /* 배경색 */
-  --bg-color-primary: #f0f2f5; /* 기본 배경 */
+  --bg-color-primary: #FDFBF8; /* 기본 배경 아주 연한 크림색 */
   --bg-color-secondary: #ffffff; /* 카드, 모달 등 내부 요소 배경 */
   --bg-color-header: #ffffff; /* 헤더 배경 */
 
@@ -45,7 +45,13 @@ body.light {
 
   /* 화이트일때 태양 아이콘 기존 검정  */
   --theme-toggle-icon-color: #17171C;
-  --theme-toggle-bg:#FFFFFF;
+
+  /* 경계선,오류 메시지,박스 그림자  */
+  --border-color: #e0e0e0; /* 경계선 색상 */
+  --accent-color: #007bff; /* 강조 색상 (링크, 버튼 등) */
+  --danger-color: #dc3545; /* 오류 메시지 색상 */
+  --box-shadow-light: 0 2px 4px rgba(0, 0, 0, 0.05); /* 옅은 그림자 */
+  --box-shadow-medium: 0 4px 8px rgba(0, 0, 0, 0.1); /* 중간 그림자 */
 }
 
 /* Dark 모드 변수 */
@@ -66,7 +72,7 @@ body.dark {
   --box-shadow-medium: 0 4px 8px rgba(0,0,0,0.3);
 
   /* 강조 색상 (테마와 무관하게 유지될 수 있음) */
-  --accent-color: #e50914; /* 다크모드에 어울리는 강조색 */
+  --accent-color: #4e721f; 
   --accent-color-hover: #4e721f; /* nav-link hover 색상 조정 */
 
   /* 오버레이 배경색 (어두운 반투명 검은색) */
@@ -74,6 +80,13 @@ body.dark {
 
   /* 다크일때 태양 아이콘 기존 하양  */
   --theme-toggle-icon-color: #F2F0EE;
+
+  /* 경계선,오류 메시지,박스 그림자  */
+  --border-color: #333333; /* 경계선 색상 */
+  --accent-color: #0099ff; /* 강조 색상 */
+  --danger-color: #ff6347; /* 오류 메시지 색상 */
+  --box-shadow-light: 0 2px 4px rgba(0, 0, 0, 0.3); /* 옅은 그림자 */
+  --box-shadow-medium: 0 4px 8px rgba(0, 0, 0, 0.5); /* 중간 그림자 */
 }
 
 /* 트랜지션 (부드러운 테마 전환) */

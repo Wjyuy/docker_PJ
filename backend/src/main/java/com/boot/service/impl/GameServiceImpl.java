@@ -21,6 +21,10 @@ public class GameServiceImpl implements GameService {
         return gameDao.findAll();
     }
 
+    public List<GameDTO> getPaginatedGames(int offset, int limit) {
+        return gameDao.findPaginated(offset, limit);
+    }
+
     @Override
     public GameDTO getGameById(Long id) {
         return gameDao.findById(id);

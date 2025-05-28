@@ -37,7 +37,9 @@ const Header: React.FC<HeaderProps> = ({ onToggleMenu }) => { // props로 onTogg
     <header className="header">
       {/* 헤더 콘텐츠: 로고, 데스크톱 내비게이션, 모바일 메뉴 버튼 */}
       <div className="header-content">
-        <img src="/Gemsup.png" alt="GEMSUP" className="header-logo" />
+        <a href="/">
+          <img src="/Gemsup.png" alt="GEMSUP" className="header-logo" />
+        </a>
 
         {/* 데스크톱/태블릿용 내비게이션 */}
         <nav className="nav desktop-nav">

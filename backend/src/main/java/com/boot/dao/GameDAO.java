@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.data.repository.query.Param;
+import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface GameDAO {
@@ -17,4 +17,6 @@ public interface GameDAO {
     void delete(@Param("id") Long id);
     
     Optional<GameDTO> findByIgdbId(@Param("igdbId") Long igdbId);
+    //페이징해서 동적인 리스트 출력
+    List<GameDTO> findPaginated(@Param("offset") int offset, @Param("limit") int limit);
 }

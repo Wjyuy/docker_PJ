@@ -1,0 +1,55 @@
+/* src/components/GameCard/GameCard.css */
+
+.game-card {
+  background-color: var(--bg-color-secondary);
+  color: var(--text-color-primary);
+  border-radius: 8px;
+  box-shadow: var(--box-shadow-light);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  height: 100%; /* 부모 그리드의 높이를 채우도록 */
+}
+
+.game-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--box-shadow-medium);
+}
+
+.game-card-image {
+  width: 100%;
+  height: 200px; /* 이미지 고정 높이 */
+  object-fit: cover; /* 이미지가 카드에 맞게 채워지도록 */
+  border-bottom: 1px solid var(--border-color);
+}
+
+.game-card-info {
+  padding: 1rem;
+  flex-grow: 1; /* 남은 공간을 채워서 내용이 길어져도 레이아웃 유지 */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* 내용이 아래로 밀리게 */
+}
+
+.game-card-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--text-color-primary);
+}
+
+.game-card-genre,
+.game-card-platform,
+.game-card-release-date,
+.game-card-rating {
+  font-size: 0.95rem;
+  color: var(--text-color-secondary);
+  margin-bottom: 0.3rem;
+}
+
+.game-card-rating {
+  font-weight: bold;
+  color: var(--accent-color); /* 평점은 강조 색상으로 */
+  margin-top: 0.5rem;
+}

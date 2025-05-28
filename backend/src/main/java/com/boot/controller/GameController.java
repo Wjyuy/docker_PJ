@@ -23,6 +23,12 @@ public class GameController {
     public List<GameDTO> getAllGames() {
         return gameService.getAllGames();
     }
+    @GetMapping("/paginated") 
+    public List<GameDTO> getPaginatedGames(
+            @RequestParam(defaultValue = "0") int offset,
+            @RequestParam(defaultValue = "20") int limit) { // 기본 20개씩 로드
+        return gameService.getPaginatedGames(offset, limit);
+    }
 
     @GetMapping("/{id}")
     public GameDTO getGameById(@PathVariable Long id) {
@@ -65,7 +71,7 @@ public class GameController {
                              @RequestParam(defaultValue = "fields id, name, genres, platforms, first_release_date, summary, cover.url, rating; sort popularity desc") String baseQuery,
                              @RequestParam(defaultValue = "500") int limit,
                              @RequestParam(defaultValue = "2000") int maxCount,
-                             @RequestParam(defaultValue = "2983") int startOffset) { 
+                             @RequestParam(defaultValue = "0") int startOffset) { 
         return igdbService.fetchAndSaveGamesPaged(baseQuery, limit, maxCount, startOffset);
     }
 }

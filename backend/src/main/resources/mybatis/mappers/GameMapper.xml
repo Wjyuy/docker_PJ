@@ -20,12 +20,27 @@
             name,
             genre,
             platform,
-            release_date AS releaseDate, -- snake_case를 camelCase로 매핑
+            release_date AS releaseDate,
             description,
-            image_url AS imageUrl,       -- snake_case를 camelCase로 매핑
+            image_url AS imageUrl,
             rating,
-            igdb_id                      -- igdb_id 컬럼 추가
+            igdb_id
         FROM game
+    </select>
+    
+    <select id="findPaginated" resultType="com.boot.dto.GameDTO">
+        SELECT
+            id,
+            name,
+            genre,
+            platform,
+            release_date AS releaseDate,
+            description,
+            image_url AS imageUrl,
+            rating,
+            igdb_id
+        FROM game
+        ORDER BY id ASC  LIMIT #{limit} OFFSET #{offset}
     </select>
 
     <select id="findById" resultType="com.boot.dto.GameDTO">

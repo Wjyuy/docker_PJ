@@ -9,4 +9,6 @@ public interface GameService {
     void createGame(GameDTO gameDto);
     void updateGame(GameDTO gameDto);
     void deleteGame(Long id);
+
+    public List<GameDTO> getPaginatedGames(int offset, int limit);
 }
