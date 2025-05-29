@@ -6,7 +6,7 @@ export interface GameDTO {
   name: string;
   genre: string;
   platform: string;
-  releaseDate: string; // LocalDate가 문자열로 넘어올 경우
+  releaseDate: string; 
   description: string;
   imageUrl: string;
   rating: number;

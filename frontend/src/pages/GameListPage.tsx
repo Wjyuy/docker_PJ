@@ -107,6 +107,7 @@ const GameListPage: React.FC = () => {
             ) : (
                 <div className="game-list-grid">
                     {games.map((game) => (
+                        
                         <GameCard key={game.id} game={game} />
                     ))}
                 </div>

@@ -103,66 +103,74 @@
     </delete>
     
     <select id="findGamesWithFilters" resultMap="GameResultMap">
-    SELECT
-        id,
-        name,
-        genre,
-        platform,
-        release_date AS releaseDate,
-        description,
-        image_url AS imageUrl,
-        rating,
-        igdb_id
-    FROM game
-    <where>
-        <if test="searchTerm != null and searchTerm != ''">
-            <choose>
-                <when test="searchType == 'name'">
-                    name ILIKE '%' || #{searchTerm} || '%'
-                </when>
-                <when test="searchType == 'genre'">
-                    genre ILIKE '%' || #{searchTerm} || '%'
-                </when>
-                <when test="searchType == 'all'">
-                    (name ILIKE '%' || #{searchTerm} || '%' OR
-                     genre ILIKE '%' || #{searchTerm} || '%' OR
-                     description ILIKE '%' || #{searchTerm} || '%')
-                </when>
-            </choose>
-        </if>
-        <if test="genre != null and genre != ''">
-            AND genre = #{genre}
-        </if>
-        <if test="platform != null and platform != ''">
-            AND platform = #{platform}
-        </if>
+        SELECT
+            id,
+            name,
+            genre,
+            platform,
+            release_date,
+            description,
+            image_url,
+            rating,
+            igdb_id
+        FROM game
+        <where>
+            <if test="searchTerm != null and searchTerm != ''">
+                <choose>
+                    <when test="searchType == 'name'">
+                        name ILIKE '%' || #{searchTerm} || '%'
+                    </when>
+                    <when test="searchType == 'genre'">
+                        genre ILIKE '%' || #{searchTerm} || '%'
+                    </when>
+                    <when test="searchType == 'all'">
+                        (name ILIKE '%' || #{searchTerm} || '%' OR
+                         genre ILIKE '%' || #{searchTerm} || '%' OR
+                         description ILIKE '%' || #{searchTerm} || '%')
+                    </when>
+                </choose>
+            </if>
+            <if test="genre != null and genre != ''">
+                AND genre ILIKE '%' || #{genre} || '%'
+            </if>
+            <if test="platform != null and platform != ''">
+                AND platform ILIKE '%' || #{platform} || '%'
+            </if>
 
-        <if test="sortBy == 'releaseDate'">
-             AND release_date IS NOT NULL
-        </if>
-    </where>
-    <choose>
-        <when test="sortBy == 'title'">
-            ORDER BY name
-            <if test="sortOrder == 'desc'">DESC</if>
-            <if test="sortOrder == 'asc'">ASC</if>
-        </when>
-        <when test="sortBy == 'rating'">
-            ORDER BY rating
-            <if test="sortOrder == 'desc'">DESC</if>
-            <if test="sortOrder == 'asc'">ASC</if>
-        </when>
-        <when test="sortBy == 'releaseDate'">
-            ORDER BY release_date
-            <if test="sortOrder == 'desc'">DESC</if>
-            <if test="sortOrder == 'asc'">ASC</if>
-        </when>
-        <otherwise>
-            ORDER BY id ASC
-        </otherwise>
-    </choose>
-    LIMIT #{limit} OFFSET #{offset}
-</select>
+            <if test="sortBy == 'releaseDate'">
+                 AND release_date IS NOT NULL
+            </if>
+        </where>
+        <choose>
+            <when test="sortBy == 'title'">
+                ORDER BY name
+                <if test="sortOrder == 'desc'">DESC</if>
+                <if test="sortOrder == 'asc'">ASC</if>
+            </when>
+            <when test="sortBy == 'rating'">
+                ORDER BY rating
+                <if test="sortOrder == 'desc'">DESC</if>
+                <if test="sortOrder == 'asc'">ASC</if>
+            </when>
+            <when test="sortBy == 'releaseDate'">
+                ORDER BY release_date
+                <if test="sortOrder == 'desc'">DESC</if>
+                <if test="sortOrder == 'asc'">ASC</if>
+            </when>
+            <otherwise>
+                ORDER BY id ASC
+            </otherwise>
+        </choose>
+        LIMIT #{limit} OFFSET #{offset}
+    </select>
+
+    <select id="findAllGenres" resultType="string">
+        SELECT DISTINCT UNNEST(string_to_array(genre, ', ')) AS single_genre
+        FROM game
+        WHERE genre IS NOT NULL AND genre != ''
+        ORDER BY single_genre ASC;
+    </select>
+
 
     <select id="countGamesWithFilters" resultType="int">
         SELECT COUNT(id)
@@ -192,11 +200,11 @@
         </where>
     </select>
 
-    <select id="findAllGenres" resultType="string">
-        SELECT DISTINCT genre FROM game WHERE genre IS NOT NULL AND genre != '' ORDER BY genre ASC
-    </select>
 
     <select id="findAllPlatforms" resultType="string">
-        SELECT DISTINCT platform FROM game WHERE platform IS NOT NULL AND platform != '' ORDER BY platform ASC
+        SELECT DISTINCT UNNEST(string_to_array(platform, ', ')) AS single_platform
+        FROM game
+        WHERE platform IS NOT NULL AND platform != ''
+        ORDER BY single_platform ASC;
     </select>
 </mapper>

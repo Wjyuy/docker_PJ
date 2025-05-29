@@ -98,6 +98,9 @@ public class GameController {
         List<GameDTO> games = gameService.getGamesWithFilters(
                 offset, limit, searchType, searchTerm, sortBy, sortOrder, genre, platform
         );
+        for (GameDTO game : games) {
+        	System.out.println("Game DTO imageUrl: " + game.getImageUrl() + ", releaseDate: " + game.getReleaseDate());
+        }
         int totalCount = gameService.countGamesWithFilters(searchType, searchTerm, genre, platform);
 
         Map<String, Object> response = new HashMap<>();
