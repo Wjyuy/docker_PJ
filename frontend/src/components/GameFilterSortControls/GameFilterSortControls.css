@@ -1,0 +1,135 @@
+/* src/components/GameFilterSortControls/GameFilterSortControls.css */
+
+/* 전체 컨트롤러 컨테이너 */
+.filter-sort-controls {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background-color: var(--bg-color-secondary);
+    border-radius: 10px;
+    box-shadow: var(--box-shadow-light);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* 검색 바 */
+.search-bar {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+/* 검색 바 내의 요소들 공통 스타일 */
+.search-type-select,
+.search-input,
+.search-button {
+    padding: 0.8rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: var(--input-bg-color);
+    color: var(--text-color-primary);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    box-sizing: border-box;
+    /* transition for smooth theme changes if applicable */
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.search-type-select {
+    /* 고정 너비 대신 flex-basis를 사용하여 유연성 확보 */
+    flex-basis: 100px; /* 적절한 최소 너비 */
+    min-width: 80px; /* 너무 작아지지 않게 */
+    cursor: pointer;
+    background-image: url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2020%2020%22%20fill%3D%22currentColor%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20d%3D%22M5.293%207.293a1%201%200%20011.414%200L10%2010.586l3.293-3.293a1%201%200%20111.414%201.414l-4%204a1%201%200%2001-1.414%200l-4-4a1%201%200%20010-1.414z%22%20clip-rule%3D%22evenodd%22%2F%3E%3C%2Fsvg%3E');
+    background-repeat: no-repeat;
+    background-position: right 0.7em center;
+    background-size: 1em;
+    padding-right: 2.5em;
+}
+
+.search-input {
+    flex-grow: 1;
+    min-width: 150px;
+}
+
+.search-button {
+    background-color: var(--accent-color);
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.search-button:hover {
+    background-color: var(--accent-color-dark);
+}
+
+/* 필터 및 정렬 그룹 */
+.filter-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem; /* 요소들 간의 간격 */
+    align-items: center;
+    /* 부모 요소의 패딩 등으로 인해 박스 밖으로 나가는 경우가 있으므로,
+       필요에 따라 max-width를 설정하거나, flex-basis/flex-grow를 잘 활용해야 합니다. */
+}
+
+/* 정렬/필터 셀렉트 박스 공통 스타일 */
+.sort-by-select,
+.sort-order-select,
+.genre-select,
+.platform-select {
+    padding: 0.8rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: var(--input-bg-color);
+    color: var(--text-color-primary);
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2020%2020%22%20fill%3D%22currentColor%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20d%3D%22M5.293%207.293a1%201%200%20011.414%200L10%2010.586l3.293-3.293a1%201%200%20111.414%201.414l-4%204a1%201%200%2001-1.414%200l-4-4a1%201%200%20010-1.414z%22%20clip-rule%3D%22evenodd%22%2F%3E%3C%2Fsvg%3E');
+    background-repeat: no-repeat;
+    background-position: right 0.7em center;
+    background-size: 1em;
+    padding-right: 2.5em;
+    box-sizing: border-box;
+
+    /* 핵심 수정: flex-basis와 flex-grow를 사용하여 공간 분배 및 줄바꿈 관리 */
+    flex-basis: calc(50% - 0.5rem); /* 기본적으로 2개씩 한 줄에 오도록 (gap 고려) */
+    min-width: 120px; /* 최소 너비 설정 */
+    flex-grow: 1; /* 남은 공간을 채우도록 */
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+    .filter-sort-controls {
+        padding: 1rem;
+        gap: 1rem;
+    }
+    .search-bar {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+    .search-type-select,
+    .search-input,
+    .search-button {
+        width: 100%;
+    }
+    .filter-group {
+        flex-direction: column;
+        align-items: flex-start; /* 세로로 쌓일 때 왼쪽 정렬 */
+        gap: 1rem;
+    }
+    /* 개별 셀렉트 박스들이 100% 너비를 차지하도록 */
+    .sort-by-select,
+    .sort-order-select,
+    .genre-select,
+    .platform-select {
+        width: 100%; /* 모바일에서 100% 너비 */
+        flex-basis: auto; /* flex-basis 초기화 */
+    }
+}

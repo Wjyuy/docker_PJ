@@ -19,6 +19,7 @@ const GameCard: React.FC<GameCardProps> = ({ game }) => {
       day: 'numeric'
     }) : '날짜 미정';
 
+    
   const defaultImageUrl = '/crack.png';
 
   return (

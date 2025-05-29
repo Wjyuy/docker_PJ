@@ -1,4 +1,5 @@
 /* src/pages/GameListPage/GameListPage.css */
+@import './GameListControls.css';
 
 .game-list-page {
   padding: 2rem;

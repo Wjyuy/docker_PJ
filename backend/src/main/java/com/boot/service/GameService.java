@@ -11,4 +11,12 @@ public interface GameService {
     void deleteGame(Long id);
 
     public List<GameDTO> getPaginatedGames(int offset, int limit);
+    public List<String> getAllPlatforms();
+    public List<String> getAllGenres();
+    public int countGamesWithFilters(String searchType, String searchTerm, String genre, String platform);
+    public List<GameDTO> getGamesWithFilters(
+            int offset, int limit,
+            String searchType, String searchTerm,
+            String sortBy, String sortOrder,
+            String genre, String platform);
 }

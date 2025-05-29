@@ -1,0 +1,133 @@
+/* src/pages/GameListControls.css */
+
+.game-list-controls {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background-color: var(--bg-color-secondary);
+  border-radius: 10px;
+  box-shadow: var(--box-shadow-light);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* 검색 바 */
+.search-bar {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap; /* 작은 화면에서 줄바꿈 */
+}
+
+.search-type-select,
+.search-input,
+.search-button {
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  font-size: 1rem;
+  background-color: var(--input-bg-color);
+  color: var(--text-color-primary);
+}
+
+.search-type-select {
+  flex-basis: 80px; /* 고정 너비 */
+  min-width: 80px;
+  cursor: pointer;
+}
+
+.search-input {
+  flex-grow: 1; /* 남은 공간을 채우도록 */
+  min-width: 150px;
+}
+
+.search-button {
+  background-color: var(--accent-color);
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.search-button:hover {
+  background-color: var(--accent-color-dark);
+}
+
+/* 필터 및 정렬 그룹 */
+.filter-sort-group {
+  display: flex;
+  flex-wrap: wrap; /* 작은 화면에서 줄바꿈 */
+  gap: 1rem;
+  align-items: center;
+}
+
+.sort-controls,
+.category-filter {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sort-controls label,
+.category-filter label {
+  font-weight: bold;
+  color: var(--text-color-secondary);
+  white-space: nowrap; /* 줄바꿈 방지 */
+}
+
+.sort-select,
+.filter-select {
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  font-size: 1rem;
+  background-color: var(--input-bg-color);
+  color: var(--text-color-primary);
+  cursor: pointer;
+}
+
+.sort-order-button {
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  font-size: 1rem;
+  background-color: var(--btn-bg);
+  color: var(--btn-svg-color);
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.sort-order-button:hover {
+  background-color: var(--btn-hover-bg);
+  color: var(--btn-svg-hover);
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+  .game-list-controls {
+    padding: 1rem;
+    gap: 1rem;
+  }
+  .search-bar {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  .search-type-select,
+  .search-input,
+  .search-button {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .filter-sort-group {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  .sort-controls,
+  .category-filter {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .sort-select,
+  .filter-select {
+    flex-grow: 1;
+  }
+}

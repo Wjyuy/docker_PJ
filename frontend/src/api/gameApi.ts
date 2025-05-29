@@ -97,6 +97,7 @@ export const syncGamesBulk = async (baseQuery?: string, limit?: number, maxCount
     }
 };
 
+// IGDB에서 게임을 동기화하는 API (오프셋을 지원)
 export const syncGamesBulkFromOffset = async (baseQuery?: string, limit?: number, maxCount?: number, startOffset?: number): Promise<number> => {
     try {
         const params = {
@@ -111,4 +112,59 @@ export const syncGamesBulkFromOffset = async (baseQuery?: string, limit?: number
         console.error('Error syncing games bulk from offset:', error);
         throw error;
     }
+};
+
+// 필터링 및 페이지네이션을 지원하는 게임 목록 API
+export interface GameFilterParams {
+  offset: number;
+  limit: number;
+  searchType?: string;
+  searchTerm?: string;
+  sortBy?: string;
+  sortOrder?: 'asc' | 'desc';
+  genre?: string;
+  platform?: string;
+}
+
+
+// 필터링 및 페이지네이션을 지원하는 게임 목록 응답 타입
+export interface PaginatedGamesResponse {
+  games: GameDTO[];
+  totalCount: number;
+  hasMore: boolean;
+}
+
+// 필터링 및 페이지네이션을 지원하는 게임 목록 API 호출 함수
+export const fetchFilteredPaginatedGames = async (params: GameFilterParams): Promise<PaginatedGamesResponse> => {
+  try {
+    const response = await axios.get<PaginatedGamesResponse>(`${API_SERVER_BASE_URL}/api/games/filtered-paginated`, {
+      params: params
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching filtered/paginated games:', error);
+    throw error;
+  }
+};
+
+// 장르 및 플랫폼 목록을 가져오는 API
+export const fetchAllGenres = async (): Promise<string[]> => {
+  try {
+    const response = await axios.get<string[]>(`${API_SERVER_BASE_URL}/api/games/genres`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching all genres:', error);
+    throw error;
+  }
+};
+
+// 플랫폼 목록을 가져오는 API
+export const fetchAllPlatforms = async (): Promise<string[]> => {
+  try {
+    const response = await axios.get<string[]>(`${API_SERVER_BASE_URL}/api/games/platforms`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching all platforms:', error);
+    throw error;
+  }
 };

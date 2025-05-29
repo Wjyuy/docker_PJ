@@ -3,12 +3,20 @@ package com.boot.controller;
 import com.boot.dto.GameDTO;
 import com.boot.service.GameService;
 import com.boot.service.IGDBService;
+
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/games")
+@Slf4j
 public class GameController {
     private final GameService gameService;
     private final IGDBService igdbService;
@@ -74,5 +82,43 @@ public class GameController {
                              @RequestParam(defaultValue = "0") int startOffset) { 
         return igdbService.fetchAndSaveGamesPaged(baseQuery, limit, maxCount, startOffset);
     }
+    
+
+    @GetMapping("/filtered-paginated") 
+    public ResponseEntity<Map<String, Object>> getFilteredPaginatedGames(
+            @RequestParam(defaultValue = "0") int offset,
+            @RequestParam(defaultValue = "12") int limit, // 기본 페이지 사이즈
+            @RequestParam(required = false) String searchType,
+            @RequestParam(required = false) String searchTerm,
+            @RequestParam(defaultValue = "id") String sortBy, // 기본 정렬 ID
+            @RequestParam(defaultValue = "asc") String sortOrder, // 기본 정렬 오름차순
+            @RequestParam(required = false) String genre,
+            @RequestParam(required = false) String platform
+    ) {
+        List<GameDTO> games = gameService.getGamesWithFilters(
+                offset, limit, searchType, searchTerm, sortBy, sortOrder, genre, platform
+        );
+        int totalCount = gameService.countGamesWithFilters(searchType, searchTerm, genre, platform);
+
+        Map<String, Object> response = new HashMap<>();
+        log.info("response=>",response);
+        response.put("games", games);
+        response.put("totalCount", totalCount);
+        response.put("hasMore", (offset + games.size()) < totalCount); // 다음 페이지가 있는지 여부
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/genres") // 모든 장르 목록 가져오기
+    public ResponseEntity<List<String>> getAllGenres() {
+        List<String> genres = gameService.getAllGenres();
+        return ResponseEntity.ok(genres);
+    }
+
+    @GetMapping("/platforms") // 모든 플랫폼 목록 가져오기
+    public ResponseEntity<List<String>> getAllPlatforms() {
+        List<String> platforms = gameService.getAllPlatforms();
+        return ResponseEntity.ok(platforms);
+    }
+
 }
 
