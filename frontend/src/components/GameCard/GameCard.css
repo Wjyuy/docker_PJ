@@ -53,3 +53,10 @@
   color: var(--accent-color); /* 평점은 강조 색상으로 */
   margin-top: 0.5rem;
 }
+
+.game-card-link {
+  text-decoration: none; /* 링크 밑줄 제거 */
+  color: inherit; /* 부모 요소의 색상 상속 (파란색 방지) */
+  display: block; /* 블록 요소로 만들어 전체 카드 클릭 가능하게 */
+  height: 100%; /* 부모 그리드의 높이를 채우도록 */
+}

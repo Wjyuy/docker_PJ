@@ -1,0 +1,177 @@
+/* src/pages/GameDetailPage/GameDetailPage.css */
+
+.game-detail-page {
+  padding: 2rem;
+  max-width: 87.5rem;
+  margin: 0 auto;
+  min-height: calc(100vh - var(--header-height) - var(--footer-height));
+  color: var(--text-color-primary);
+}
+
+.game-detail-container {
+  background-color: var(--bg-color-secondary);
+  border-radius: 10px;
+  box-shadow: var(--box-shadow-medium);
+  padding: 2.5rem;
+}
+
+.game-detail-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap; /* 모바일에서 제목과 버튼이 줄바꿈되도록 */
+}
+
+.back-button {
+  background: none;
+  border: none;
+  color: var(--accent-color);
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  margin-right: 1.5rem;
+  text-decoration: none; /* 텍스트 밑줄 제거 */
+}
+
+.back-button:hover {
+  background-color: var(--btn-hover-bg);
+  color: var(--btn-svg-hover);
+}
+
+.game-detail-title {
+  font-size: 2.8rem;
+  font-weight: bold;
+  color: var(--text-color-primary);
+  margin: 0;
+  flex-grow: 1; /* 제목이 남은 공간을 채우도록 */
+}
+
+.game-detail-content {
+  display: flex;
+  gap: 2.5rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap; /* 모바일에서 줄바꿈 */
+}
+
+.game-detail-image-wrapper {
+  flex-shrink: 0; /* 이미지가 줄어들지 않도록 */
+  width: 300px; /* 고정 너비 */
+  height: 400px; /* 고정 높이 */
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: var(--box-shadow-light);
+}
+
+.game-detail-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.game-detail-info {
+  flex-grow: 1;
+  font-size: 1.1rem;
+  line-height: 1.8;
+}
+
+.game-detail-info p {
+  margin-bottom: 0.8rem;
+}
+
+.game-detail-info strong {
+  color: var(--text-color-secondary);
+  margin-right: 0.5rem;
+}
+
+.game-detail-description {
+  margin-top: 2rem;
+}
+
+.game-detail-description h2 {
+  font-size: 1.8rem;
+  color: var(--text-color-primary);
+  margin-bottom: 1rem;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 0.5rem;
+}
+
+.game-detail-description p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-color-primary);
+  white-space: pre-wrap; /* 줄바꿈 유지 */
+}
+
+.loading-message,
+.error-message,
+.no-game-found {
+  text-align: center;
+  font-size: 1.2rem;
+  color: var(--text-color-secondary);
+  padding: 3rem 0;
+}
+
+.error-message, .no-game-found {
+  color: var(--danger-color);
+}
+
+/* 모바일 반응형 */
+@media (max-width: 1024px) {
+  .game-detail-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  .back-button {
+    margin-right: 0;
+  }
+  .game-detail-title {
+    font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .game-detail-page {
+    padding: 1rem;
+  }
+  .game-detail-container {
+    padding: 1.5rem;
+  }
+  .game-detail-content {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  .game-detail-image-wrapper {
+    width: 250px;
+    height: 333px; /* 비율 유지 */
+  }
+  .game-detail-title {
+    font-size: 1.8rem;
+    text-align: center;
+    width: 100%;
+  }
+  .game-detail-info, .game-detail-description {
+    font-size: 0.95rem;
+  }
+  .game-detail-description h2 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .game-detail-container {
+    padding: 1rem;
+  }
+  .game-detail-image-wrapper {
+    width: 100%; /* 모바일에서 이미지 꽉 채우기 */
+    height: auto;
+    max-height: 300px;
+  }
+  .game-detail-image {
+    object-fit: contain; /* 이미지가 잘리지 않도록 */
+  }
+}

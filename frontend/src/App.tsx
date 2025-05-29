@@ -4,6 +4,7 @@ import { ThemeProvider } from './contexts/ThemeContext';
 import ThemeToggleButton from './components/ThemeToggleButton/ThemeToggleButton';
 import MainLayout from './components/MainLayout';
 import GameListPage from './pages/GameListPage';
+import GameDetailPage from './pages/GameDetailPage';
 import './App.css';
 import './styles/global.css'; // 확대,축소 반응형 스타일 (다크/라이트 모드 기본 스타일 포함)
 
@@ -16,7 +17,7 @@ const App: React.FC = () => {
           <Routes>
             <Route path="/" element={<Navigate to="/games" replace />} />
             <Route path="/games" element={<GameListPage />} />
-            {/* 추후 상세/검색/위시리스트/리뷰/추천 등 라우트 추가 */}
+            <Route path="/games/:id" element={<GameDetailPage />} />
           </Routes>
         </MainLayout>
       </Router>
