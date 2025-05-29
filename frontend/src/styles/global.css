@@ -48,7 +48,6 @@ body.light {
 
   /* 경계선,오류 메시지,박스 그림자  */
   --border-color: #e0e0e0; /* 경계선 색상 */
-  --accent-color: #007bff; /* 강조 색상 (링크, 버튼 등) */
   --danger-color: #dc3545; /* 오류 메시지 색상 */
   --box-shadow-light: 0 2px 4px rgba(0, 0, 0, 0.05); /* 옅은 그림자 */
   --box-shadow-medium: 0 4px 8px rgba(0, 0, 0, 0.1); /* 중간 그림자 */
@@ -83,7 +82,6 @@ body.dark {
 
   /* 경계선,오류 메시지,박스 그림자  */
   --border-color: #333333; /* 경계선 색상 */
-  --accent-color: #0099ff; /* 강조 색상 */
   --danger-color: #ff6347; /* 오류 메시지 색상 */
   --box-shadow-light: 0 2px 4px rgba(0, 0, 0, 0.3); /* 옅은 그림자 */
   --box-shadow-medium: 0 4px 8px rgba(0, 0, 0, 0.5); /* 중간 그림자 */

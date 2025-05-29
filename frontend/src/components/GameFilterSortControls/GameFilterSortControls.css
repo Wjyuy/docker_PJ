@@ -1,135 +1,215 @@
 /* src/components/GameFilterSortControls/GameFilterSortControls.css */
 
-/* 전체 컨트롤러 컨테이너 */
+/* 전체 컨트롤 컨테이너 스타일 (선택 사항, 필요에 따라 조정) */
 .filter-sort-controls {
-    margin-bottom: 2rem;
-    padding: 1.5rem;
-    background-color: var(--bg-color-secondary);
-    border-radius: 10px;
-    box-shadow: var(--box-shadow-light);
     display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+    flex-wrap: wrap; /* 반응형을 위해 추가 */
+    gap: 1rem; /* 요소들 사이의 간격 */
+    margin-bottom: 1.5rem;
+    align-items: center;
+    justify-content: space-between; /* 요소들을 양 끝으로 정렬 */
 }
 
-/* 검색 바 */
+/* 검색 바 스타일 (선택 사항) */
 .search-bar {
     display: flex;
     gap: 0.5rem;
-    flex-wrap: wrap;
-    align-items: center;
-}
-
-/* 검색 바 내의 요소들 공통 스타일 */
-.search-type-select,
-.search-input,
-.search-button {
-    padding: 0.8rem 1rem;
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-    font-size: 1rem;
-    background-color: var(--input-bg-color);
-    color: var(--text-color-primary);
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    box-sizing: border-box;
-    /* transition for smooth theme changes if applicable */
-    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
-}
-
-.search-type-select {
-    /* 고정 너비 대신 flex-basis를 사용하여 유연성 확보 */
-    flex-basis: 100px; /* 적절한 최소 너비 */
-    min-width: 80px; /* 너무 작아지지 않게 */
-    cursor: pointer;
-    background-image: url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2020%2020%22%20fill%3D%22currentColor%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20d%3D%22M5.293%207.293a1%201%200%20011.414%200L10%2010.586l3.293-3.293a1%201%200%20111.414%201.414l-4%204a1%201%200%2001-1.414%200l-4-4a1%201%200%20010-1.414z%22%20clip-rule%3D%22evenodd%22%2F%3E%3C%2Fsvg%3E');
-    background-repeat: no-repeat;
-    background-position: right 0.7em center;
-    background-size: 1em;
-    padding-right: 2.5em;
+    flex-grow: 1; /* 검색 바가 공간을 최대한 차지하도록 */
+    max-width: 500px; /* 최대 너비 설정 */
 }
 
 .search-input {
     flex-grow: 1;
-    min-width: 150px;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.25rem;
+    background-color: var(--bg-color-secondary); /* 기본 배경색 */
+    color: var(--text-color-primary); /* 기본 텍스트색 */
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.search-input::placeholder {
+    color: var(--text-color-secondary); /* placeholder 색상 */
+}
+
+.search-input:focus {
+    outline: none;
+    /* border-color: var(--accent-color); */
+    /* box-shadow: var(--box-shadow-light); */
 }
 
 .search-button {
-    background-color: var(--accent-color);
-    color: white;
+    padding: 0.5rem 1rem;
+    background-color: var(--text-color-secondary) !important; /* ★★★ 파란색 계열 예시 (원하는 색상으로 변경) ★★★ */
+    color: white; /* 버튼 텍스트는 흰색으로 */
+    border: none ;
+    border-radius: 0.25rem;
     cursor: pointer;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.3s ease, opacity 0.3s ease;
 }
 
 .search-button:hover {
-    background-color: var(--accent-color-dark);
+    background-color: var(--accent-color) !important; /* ★★★ hover 시 더 진한 파란색 ★★★ */
+    opacity: 1; /* 투명도 변화 대신 색상 변화에 집중 */
 }
 
-/* 필터 및 정렬 그룹 */
+/* 필터 그룹 스타일 (장르, 플랫폼, 정렬 드롭다운을 묶는 div) */
 .filter-group {
     display: flex;
-    flex-wrap: wrap;
-    gap: 1rem; /* 요소들 간의 간격 */
     align-items: center;
-    /* 부모 요소의 패딩 등으로 인해 박스 밖으로 나가는 경우가 있으므로,
-       필요에 따라 max-width를 설정하거나, flex-basis/flex-grow를 잘 활용해야 합니다. */
+    gap: 0.5rem;
+    flex-wrap: wrap; /* 드롭다운이 많아지면 줄바꿈되도록 */
 }
 
-/* 정렬/필터 셀렉트 박스 공통 스타일 */
+.filter-group label {
+    color: var(--text-color-primary);
+    font-weight: bold;
+}
+
+/* ----------------------------------------------------- */
+/* 드롭다운 박스 (<select>) 공통 스타일 */
+/* ----------------------------------------------------- */
+/* 검색 타입, 정렬 기준/순서, 장르, 플랫폼 드롭다운에 모두 적용 */
+.search-type-select,
 .sort-by-select,
 .sort-order-select,
 .genre-select,
 .platform-select {
-    padding: 0.8rem 1rem;
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-    font-size: 1rem;
-    background-color: var(--input-bg-color);
+    /* 기본 라이트 모드 스타일 (var()의 기본값 또는 body.light에서 상속) */
+    background-color: var(--bg-color-secondary);
     color: var(--text-color-primary);
+    border: 1px solid var(--border-color);
+    padding: 0.5rem 1rem; /* 적절한 패딩 */
+    border-radius: 0.25rem; /* 둥근 모서리 */
+    font-size: 1rem;
     cursor: pointer;
+    outline: none; /* 포커스 시 기본 아웃라인 제거 */
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; /* 부드러운 전환 */
+
+    /* 브라우저 기본 드롭다운 화살표 제거 및 커스텀 화살표 아이콘 적용 */
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    background-image: url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2020%2020%22%20fill%3D%22currentColor%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20d%3D%22M5.293%207.293a1%201%200%20011.414%200L10%2010.586l3.293-3.293a1%201%200%20111.414%201.414l-4%204a1%201%200%2001-1.414%200l-4-4a1%201%200%20010-1.414z%22%20clip-rule%3D%22evenodd%22%2F%3E%3C%2Fsvg%3E');
     background-repeat: no-repeat;
-    background-position: right 0.7em center;
-    background-size: 1em;
-    padding-right: 2.5em;
-    box-sizing: border-box;
-
-    /* 핵심 수정: flex-basis와 flex-grow를 사용하여 공간 분배 및 줄바꿈 관리 */
-    flex-basis: calc(50% - 0.5rem); /* 기본적으로 2개씩 한 줄에 오도록 (gap 고려) */
-    min-width: 120px; /* 최소 너비 설정 */
-    flex-grow: 1; /* 남은 공간을 채우도록 */
+    background-position: right 0.7em top 50%, 0 0;
+    background-size: 0.65em auto, 100%;
+    /* 라이트 모드 화살표 색상 (어두운 회색) */
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292%22%20height%3D%22292%22%3E%3Cpath%20fill%3D%22%23333%22%20d%3D%22M287%2069L146%20209L5%2069H287Z%22%2F%3E%3C%2Fsvg%3E');
 }
 
-/* 반응형 */
+/* 드롭다운 포커스 스타일 */
+.search-type-select:focus,
+.sort-by-select:focus,
+.sort-order-select:focus,
+.genre-select:focus,
+.platform-select:focus {
+    /* border-color: var(--accent-color); */
+    /* box-shadow: 0 0 0 3px rgba(var(--text-color-secondary, 78, 114, 31), 0.25); */
+}
+
+/* ----------------------------------------------------- */
+/* 다크 모드일 때 드롭다운 스타일 오버라이드 */
+/* ----------------------------------------------------- */
+body.dark .search-type-select,
+body.dark .sort-by-select,
+body.dark .sort-order-select,
+body.dark .genre-select,
+body.dark .platform-select {
+    background-color: var(--bg-color-secondary); /* 다크 모드 배경색 (global.css의 --bg-color-secondary) */
+    color: var(--text-color-primary); /* 다크 모드 텍스트색 (global.css의 --text-color-primary) */
+    border-color: var(--border-color); /* 다크 모드 경계선 색상 (global.css의 --border-color) */
+    /* 다크 모드 화살표 색상 (밝은 회색) */
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292%22%20height%3D%22292%22%3E%3Cpath%20fill%3D%22%23f0f0f0%22%20d%3D%22M287%2069L146%20209L5%2069H287Z%22%2F%3E%3C%2Fsvg%3E');
+}
+
+/* src/components/GameFilterSortControls/GameFilterSortControls.css */
+
+/* ... (이전 CSS 코드 유지) ... */
+
+/* ----------------------------------------------------- */
+/* 4. 전역적으로 사용될 수 있는 기본 스타일 (선택 사항) */
+/* ----------------------------------------------------- */
+
+/* ... (기존 검색바 및 필터그룹 스타일 유지) ... */
+
+/* 드롭다운 박스 (<select>) 공통 스타일 */
+.search-type-select,
+.sort-by-select,
+.sort-order-select,
+.genre-select,
+.platform-select {
+    /* ... (기존 공통 스타일 유지) ... */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* 플랫폼 드롭다운 개별 스타일 (컴퓨터 화면에만 적용) */
+.platform-select {
+    width: 180px; /* 플랫폼 드롭다운의 고정 너비 (조정 가능) */
+    flex-grow: 0;
+    flex-shrink: 0;
+    min-width: 150px;
+    max-width: 200px;
+}
+
+
+/* ----------------------------------------------------- */
+/* 반응형 디자인 (화면 축소 시 레이아웃 조정) */
+/* ----------------------------------------------------- */
+
 @media (max-width: 768px) {
     .filter-sort-controls {
-        padding: 1rem;
+        flex-direction: column;
+        align-items: stretch;
         gap: 1rem;
+        flex-wrap: wrap;
+        padding: 0 0.5rem;
     }
+
     .search-bar {
         flex-direction: column;
-        gap: 0.8rem;
+        width: 100%;
+        max-width: none;
+        min-width: unset;
+        gap: 0.5rem;
+        flex-shrink: 1;
     }
+
+    /* 검색 바 내부 요소들 */
     .search-type-select,
     .search-input,
     .search-button {
         width: 100%;
+        min-width: unset;
+        flex-shrink: 1;
     }
+
     .filter-group {
         flex-direction: column;
-        align-items: flex-start; /* 세로로 쌓일 때 왼쪽 정렬 */
-        gap: 1rem;
+        width: 100% !important; /* ★★★ 필터 그룹 너비 100% 강제 ★★★ */
+        min-width: unset !important; /* ★★★ 필터 그룹 최소 너비 해제 강제 ★★★ */
+        gap: 0.5rem;
+        align-items: stretch;
+        flex-wrap: wrap;
+        flex-shrink: 1;
     }
-    /* 개별 셀렉트 박스들이 100% 너비를 차지하도록 */
+
+    /* 모든 드롭다운 박스 너비를 100%로 (모바일에서는) */
+    .search-type-select,
     .sort-by-select,
     .sort-order-select,
     .genre-select,
     .platform-select {
-        width: 100%; /* 모바일에서 100% 너비 */
-        flex-basis: auto; /* flex-basis 초기화 */
+        width: 100% !important; /* ★★★ 모바일에서 100% 너비 강제 ★★★ */
+        min-width: 0 !important; /* ★★★ 모바일에서 최소 너비 제한 해제 강제 ★★★ */
+        max-width: none !important; /* ★★★ 모바일에서 최대 너비 제한 해제 강제 ★★★ */
+        flex-grow: 0 !important;
+        flex-shrink: 1 !important;
+
+        /* 모바일에서는 텍스트 오버플로우 처리 해제 (줄바꿈 허용) */
+        white-space: normal !important;
+        overflow: visible !important;
+        text-overflow: clip !important;
     }
 }

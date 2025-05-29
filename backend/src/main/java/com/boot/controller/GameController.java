@@ -98,13 +98,9 @@ public class GameController {
         List<GameDTO> games = gameService.getGamesWithFilters(
                 offset, limit, searchType, searchTerm, sortBy, sortOrder, genre, platform
         );
-        for (GameDTO game : games) {
-        	System.out.println("Game DTO imageUrl: " + game.getImageUrl() + ", releaseDate: " + game.getReleaseDate());
-        }
         int totalCount = gameService.countGamesWithFilters(searchType, searchTerm, genre, platform);
 
         Map<String, Object> response = new HashMap<>();
-        log.info("response=>",response);
         response.put("games", games);
         response.put("totalCount", totalCount);
         response.put("hasMore", (offset + games.size()) < totalCount); // 다음 페이지가 있는지 여부

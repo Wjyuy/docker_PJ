@@ -90,38 +90,36 @@ const GameFilterSortControls: React.FC<GameFilterSortControlsProps> = ({
 
 
     return (
-        <div className="filter-sort-controls">
+        <div className="filter-sort-controls"> {/* 상위 컨테이너 클래스도 추가 */}
             <form onSubmit={handleSearchSubmit} className="search-bar">
-                <select value={searchType} onChange={handleSearchTypeChange} className="search-type-select">
+                <select value={searchType} onChange={handleSearchTypeChange} className="search-type-select"> {/* 클래스 추가 */}
                     <option value="all">전체</option>
                     <option value="name">이름</option>
-                    {/* <option value="developer">개발사</option>
-                    <option value="publisher">배급사</option> */}
                 </select>
                 <input
                     type="text"
                     placeholder="검색어를 입력하세요..."
-                    value={localSearchTerm} // 로컬 상태 사용
+                    value={localSearchTerm}
                     onChange={handleSearchInputChange}
                     className="search-input"
                 />
-                <button type="submit" className="search-button">검색</button>
+                <button type="submit" className="search-button">검색</button> {/* 클래스 추가 */}
             </form>
 
-            <div className="filter-group">
+            <div className="filter-group"> {/* 필터 그룹 컨테이너 클래스 추가 */}
                 {/* 정렬 기준 선택 */}
-                <select value={sortBy} onChange={handleSortByChange} className="sort-by-select">
+                <select value={sortBy} onChange={handleSortByChange} className="sort-by-select"> {/* 클래스 추가 */}
                     <option value="id">기본</option>
                     <option value="title">제목</option>
                     <option value="releaseDate">출시일</option>
                 </select>
                 {/* 정렬 순서 선택 */}
-                <select value={sortOrder} onChange={handleSortOrderChange} className="sort-order-select">
+                <select value={sortOrder} onChange={handleSortOrderChange} className="sort-order-select"> {/* 클래스 추가 */}
                     <option value="asc">오름차순</option>
                     <option value="desc">내림차순</option>
                 </select>
                 {/* 장르 필터 */}
-                <select value={selectedGenre} onChange={handleGenreChange} className="genre-select">
+                <select value={selectedGenre} onChange={handleGenreChange} className="genre-select"> {/* 클래스 추가 */}
                     <option value="">모든 장르</option>
                     {genresLoading && <option disabled>장르 로딩 중...</option>}
                     {genresError && <option disabled>{genresError}</option>}
@@ -130,7 +128,7 @@ const GameFilterSortControls: React.FC<GameFilterSortControlsProps> = ({
                     ))}
                 </select>
                 {/* 플랫폼 필터 */}
-                <select value={selectedPlatform} onChange={handlePlatformChange} className="platform-select">
+                <select value={selectedPlatform} onChange={handlePlatformChange} className="platform-select"> {/* 클래스 추가 */}
                     <option value="">모든 플랫폼</option>
                     {platformsLoading && <option disabled>플랫폼 로딩 중...</option>}
                     {platformsError && <option disabled>{platformsError}</option>}
